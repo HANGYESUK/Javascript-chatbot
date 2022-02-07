@@ -1,6 +1,7 @@
 ![header](https://capsule-render.vercel.app/api?type=wave&color=gradient&height=200&section=header&text=자바스크립트%20챗봇&fontAlign=50&fontAlignY=70&fontSize=90&fontColor=white)
 
 # 개인프로젝트 - 루피챗봇(군침)
+# HTML파일에 css와 js모두 들어있어 이미지와 함께 다운받으시면 됩니다.
 # 소개
 - 코뮤니티에서 진행한 모각코(웹JS)https://comu.oopy.io/
 - FE기여도 : 100%
