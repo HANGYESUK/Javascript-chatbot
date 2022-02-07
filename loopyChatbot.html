@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <style>
+        .text-box{
+            width: 300px;
+            height: 200px;
+            border: 3px solid;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .text-box p {
+            margin-top: 80px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100px;
+        }
+        .container div {
+            padding: 20px;
+        }
+        #img {
+            height: 200px;
+        }
+        .input_text {
+            border: 2px solid #e84393;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .btn {
+            width: 200px;
+            height: 50px;
+            background-color: #e84393;
+            color: white;
+            border-radius: 30px;
+            border: none;
+            margin: 5px;
+            display: block;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.08);
+        }
+        .main-btn {
+            display: block;
+        }
+        #yes-btn {
+            display: none;
+        }
+        #no-btn {
+            display: none;
+        }
+
+    </style>
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div class="container">
+
+        <div class="text-box">
+            <p class="text">뭐 먹을래?</p>
+        </div>
+        <div><img id="img" src="./img/루피.jpg"></div>
+        <div><input id="input_text" type="text" onchange="input_change()"></div>
+        <button class="main-btn btn" onclick="show()">시키기</button>
+        <button class="btn" id = "yes-btn" onclick="yes()">그래!</button>
+        <button class="btn" id = "no-btn" onclick="No()">아니!</button>
+    </div>
+
+    
+    
+
+    <script>
+
+
+        let text = document.getElementsByClassName('text')[0];
+        
+
+        var typewriter = new Typewriter(text[0], {
+            loop: true
+        });
+
+        typewriter.typeString('뭐 먹을래?')
+            .pauseFor(1500)
+            .deleteAll()
+            .start()
+
+        let img = document.getElementById("img");
+        let main_btn = document.getElementsByClassName('main-btn');
+        let yes_btn = document.getElementById('yes-btn');
+        let no_btn = document.getElementById('no-btn');
+        let input_text;
+
+        function input_change() {
+            input_text = document.getElementById("input_text").value;
+            console.log(input_text)
+        }
+
+
+
+        // let food = ["치킨", "피자", "짜장면", "족발", "덮밥"];
+
+        let food = 
+        [
+            {
+                "Q" : "치킨",
+                "A" : "군침이 싸악~"
+            },
+            {
+                "Q" : "피자",
+                "A" : "치즈가 쭈욱~"
+            },
+            {
+                "Q" : "짜장면",
+                "A" : "군만두는 서비스~"
+            },
+            {
+                "Q" : "덮밥",
+                "A" : "쓰가묵자~"
+            }
+        ]
+
+        console.log(food.length)
+
+
+        let answer = 0;
+
+        function No() {
+            answer = 2;
+            back();
+            console.log(answer)
+            answer = 0;
+        }
+
+        function yes(i) {
+            answer = 1;
+            append();
+            back();
+            console.log(answer)
+            answer = 0;
+        }
+
+
+        function typingStop() {
+            typewriter.typeString()
+                .stop()
+        }
+
+        function gunchim(i) {
+            typing(food[i].A);
+            
+            img.src = "./img/잔망루피.png"
+            main_btn[0].innerHTML = "돌아가기"
+        }
+
+        function qustion() {
+            typing("그게 뭐야?<br>알려줄텨?")
+            img.src = "./img/잔망루피.png"
+            main_btn[0].innerHTML = "돌아가기"
+            yes_btn.style.display = "block"
+            no_btn.style.display = "block"
+        }
+        
+        function back() {
+            typing("뭐 먹을래?");
+            
+            main_btn[0].innerHTML = "시키기"
+            yes_btn.style.display = "none"
+            no_btn.style.display = "none"
+            img.src = "./img/루피.jpg"
+        }
+
+        function typing(id) {
+            var typewriter = new Typewriter(text, {
+            loop: true
+            });
+            typewriter.typeString(id)
+                .pauseFor(1500)
+                .deleteAll()
+                .deleteChars(7)
+                .start()
+        }
+
+        function append() {
+            food.push({Q : `${input_text}`, A : "군침이 싸악~"})
+            console.log(food[food.length-1].Q)
+        }
+
+
+
+            function show() {
+
+
+                if ( main_btn[0].innerHTML == "돌아가기") {
+                    back();
+                }
+                else {
+                    for (let i=0; i<food.length; i++) {
+                        if (input_text == food[i].Q) {
+                            gunchim(i);
+                            break
+                        }
+                        else if (input_text == "") {
+                            alert("음식을 입력해 주세요!")
+                            break
+                        }
+                        else if (i == (food.length-1)) {
+                            console.log(input_text)
+                            qustion();
+                        }
+
+                    }
+                }
+                console.log(food);
+            }
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>
